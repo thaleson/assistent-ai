@@ -861,3 +861,27 @@ header {
             0.78rem;
     }
 }
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    [data-testid="stSidebar"] {
+        width: 85vw !important;
+        max-width: 320px !important;
+    }
+
+    [data-testid="collapsedControl"] {
+        top:
+            calc(
+                0.5rem +
+                env(safe-area-inset-top)
+            ) !important;
+
+        left:
+            0.6rem !important;
+    }
+}
