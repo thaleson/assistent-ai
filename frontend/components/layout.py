@@ -112,7 +112,9 @@ def render_sidebar() -> None:
 
         st.divider()
 
-        render_conversation_history()
+        render_conversation_history(
+            key_prefix="sidebar_history"
+        )
 
         st.divider()
 
@@ -183,4 +185,6 @@ def render_mobile_menu() -> None:
 
         st.divider()
 
-        render_conversation_history()    
+        render_conversation_history(
+                    key_prefix="mobile_history"
+                )  

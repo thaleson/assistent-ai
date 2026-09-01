@@ -82,6 +82,8 @@ def open_conversation(
 
 
 def render_conversation_history() -> None:
+
+    key_prefix:str = "history"
     """
     Render clickable recent conversations in the sidebar.
     """
@@ -119,7 +121,7 @@ def render_conversation_history() -> None:
 
         if st.button(
             title,
-            key=f"history_{conversation_id}",
+            key=f"{key_prefix}_{conversation_id}",
             use_container_width=True,
         ):
             try:
