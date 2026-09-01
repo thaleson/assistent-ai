@@ -465,6 +465,10 @@ footer {
         hidden;
 }
 
+header {
+    visibility:
+        hidden;
+}
 
 [data-testid="stToolbar"] {
     visibility:
