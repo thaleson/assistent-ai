@@ -864,7 +864,7 @@ header {
 
 
 /* =========================================================
-   MOBILE SIDEBAR REOPEN BUTTON
+   MOBILE SIDEBAR TOGGLE
    ========================================================= */
 
 @media (max-width: 768px) {
@@ -875,24 +875,13 @@ header {
         background: transparent !important;
     }
 
-    [data-testid="collapsedControl"] {
+    [data-testid="stSidebarCollapseButton"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-
-        position: fixed !important;
-
-        top: calc(
-            0.6rem +
-            env(safe-area-inset-top)
-        ) !important;
-
-        left: 0.6rem !important;
-
-        z-index: 999999 !important;
     }
 
-    [data-testid="collapsedControl"] button {
+    [data-testid="stSidebarCollapseButton"] button {
         display: flex !important;
         visibility: visible !important;
 
@@ -906,9 +895,7 @@ header {
 
         background: rgba(25, 17, 29, 0.95) !important;
 
-        border: 1px solid rgba(244, 114, 182, 0.30) !important;
-
-        backdrop-filter: blur(12px);
+        border: 1px solid rgba(244, 114, 182, 0.28) !important;
 
         color: #f9a8d4 !important;
     }
