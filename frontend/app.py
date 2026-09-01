@@ -14,6 +14,7 @@ from frontend.components.layout import (
     load_css,
     render_footer,
     render_header,
+    render_mobile_menu,
     render_sidebar,
 )
 from frontend.state.session import initialize_session
@@ -41,6 +42,7 @@ def main() -> None:
 
     render_sidebar()
     render_header()
+    render_mobile_menu()
 
     (
         general_tab,

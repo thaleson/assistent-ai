@@ -132,3 +132,55 @@ def render_footer() -> None:
         </div>
         """
     )
+
+
+def render_mobile_menu() -> None:
+    """
+    Render the main application navigation menu.
+    """
+
+    with st.popover(
+        "☰ Menu",
+        use_container_width=False,
+    ):
+        st.markdown("### 🌷 Raissa AI")
+
+        st.caption(
+            "Conversas, estudos e organização."
+        )
+
+        if st.button(
+            "🌷 Nova conversa",
+            use_container_width=True,
+            key="mobile_new_general",
+        ):
+            clear_conversation("general")
+            st.rerun()
+
+        if st.button(
+            "🩺 Novo estudo",
+            use_container_width=True,
+            key="mobile_new_nursing",
+        ):
+            clear_conversation("nursing")
+            st.rerun()
+
+        if st.button(
+            "💇‍♀️ Novo salão",
+            use_container_width=True,
+            key="mobile_new_beauty",
+        ):
+            clear_conversation("beauty")
+            st.rerun()
+
+        if st.button(
+            "💰 Novo planejamento",
+            use_container_width=True,
+            key="mobile_new_finance",
+        ):
+            clear_conversation("finance")
+            st.rerun()
+
+        st.divider()
+
+        render_conversation_history()    
