@@ -1,7 +1,6 @@
-import httpx
 import streamlit as st
 
-from frontend.services.api_client import (
+from frontend.services.assistant_service import (
     get_conversation,
     list_conversations,
 )
@@ -91,13 +90,13 @@ def render_conversation_history() -> None:
     try:
         conversations = list_conversations()
 
-    except httpx.RequestError:
+    except Exception:
         st.caption(
             "Não foi possível carregar o histórico."
         )
         return
 
-    except httpx.HTTPStatusError:
+    except Exception:
         st.caption(
             "Erro ao carregar o histórico."
         )
@@ -130,12 +129,12 @@ def render_conversation_history() -> None:
 
                 st.rerun()
 
-            except httpx.RequestError:
+            except Exception:
                 st.error(
                     "Não foi possível abrir essa conversa."
                 )
 
-            except httpx.HTTPStatusError:
+            except Exception:
                 st.error(
                     "Essa conversa não pôde ser carregada."
                 )

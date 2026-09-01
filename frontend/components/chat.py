@@ -1,7 +1,8 @@
-import httpx
 import streamlit as st
 
-from frontend.services.api_client import send_message
+from frontend.services.assistant_service import (
+    send_message,
+)
 from frontend.components.conversation_export import (
     render_conversation_export,
 )
@@ -166,13 +167,13 @@ def process_message(
                     }
                 )
 
-            except httpx.HTTPStatusError:
+            except Exception:
                 st.error(
                     "O servidor não conseguiu "
                     "processar sua mensagem."
                 )
 
-            except httpx.RequestError:
+            except Exception:
                 st.error(
                     "Não foi possível conectar "
                     "à Raissa AI."

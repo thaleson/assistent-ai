@@ -1,9 +1,7 @@
-import httpx
 import streamlit as st
 
-from frontend.services.api_client import (
-    download_summary_document,
-    generate_conversation_summary,
+from frontend.services.assistant_service import (
+    prepare_conversation_material,
 )
 
 
@@ -20,41 +18,36 @@ def _generate_material(
     )
 
     try:
-        summary = generate_conversation_summary(
+        progress.progress(
+            20,
+            text="Analisando a conversa...",
+        )
+
+        material = prepare_conversation_material(
             conversation_id
+        )
+
+        progress.progress(
+            55,
+            text="Resumo pronto. Preparando PDF...",
         )
 
         st.session_state[
             f"{area}_summary"
-        ] = summary
-
-        progress.progress(
-            35,
-            text="Resumo preparado. Gerando PDF...",
-        )
-
-        pdf = download_summary_document(
-            conversation_id=conversation_id,
-            document_format="pdf",
-        )
+        ] = material["summary"]
 
         st.session_state[
             f"{area}_summary_pdf"
-        ] = pdf
+        ] = material["pdf"]
 
         progress.progress(
-            70,
-            text="PDF pronto. Gerando DOCX...",
-        )
-
-        docx = download_summary_document(
-            conversation_id=conversation_id,
-            document_format="docx",
+            80,
+            text="PDF pronto. Preparando DOCX...",
         )
 
         st.session_state[
             f"{area}_summary_docx"
-        ] = docx
+        ] = material["docx"]
 
         progress.progress(
             100,
@@ -65,12 +58,7 @@ def _generate_material(
             "Resumo e arquivos preparados com sucesso."
         )
 
-    except httpx.RequestError:
-        st.error(
-            "Não foi possível conectar ao servidor."
-        )
-
-    except httpx.HTTPStatusError:
+    except Exception:
         st.error(
             "Não foi possível preparar o material."
         )
@@ -99,9 +87,9 @@ def _render_downloads(
         if pdf:
             st.download_button(
                 label="📄 Baixar PDF",
-                data=pdf,
-                file_name="resumo_raissa_ai.pdf",
-                mime="application/pdf",
+                data=pdf["content"],
+                file_name=pdf["filename"],
+                mime=pdf["media_type"],
                 key=f"{area}_download_pdf",
                 use_container_width=True,
             )
@@ -110,12 +98,9 @@ def _render_downloads(
         if docx:
             st.download_button(
                 label="📝 Baixar DOCX",
-                data=docx,
-                file_name="resumo_raissa_ai.docx",
-                mime=(
-                    "application/vnd.openxmlformats-officedocument."
-                    "wordprocessingml.document"
-                ),
+                data=docx["content"],
+                file_name=docx["filename"],
+                mime=docx["media_type"],
                 key=f"{area}_download_docx",
                 use_container_width=True,
             )
