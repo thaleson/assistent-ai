@@ -1,25 +1,82 @@
+/* =========================================================
+   RAISSA AI
+   Responsive / Mobile First Interface
+   ========================================================= */
+
+:root {
+    --raissa-bg: #0d0b12;
+    --raissa-surface: #151019;
+    --raissa-surface-soft: rgba(255, 255, 255, 0.025);
+
+    --raissa-pink: #f472b6;
+    --raissa-pink-light: #f9a8d4;
+    --raissa-purple: #c084fc;
+
+    --raissa-text: #f5edf6;
+    --raissa-text-soft: #aaa0ae;
+    --raissa-text-muted: #746b78;
+
+    --raissa-border: rgba(244, 114, 182, 0.14);
+}
+
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+html,
+body,
+[data-testid="stAppViewContainer"],
 .stApp {
     background:
         radial-gradient(
-            circle at 10% 10%,
+            circle at 10% 0%,
             rgba(236, 72, 153, 0.10),
             transparent 30%
         ),
         radial-gradient(
-            circle at 90% 10%,
+            circle at 90% 0%,
             rgba(168, 85, 247, 0.08),
             transparent 30%
         ),
-        #0d0b12;
+        var(--raissa-bg);
+
+    overflow-x: hidden;
 }
+
+html,
+body {
+    overscroll-behavior-y: none;
+}
+
+.stApp {
+    min-height: 100dvh;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
 
 .block-container {
+    width: 100%;
     max-width: 1000px;
+
     padding-top: 2rem;
-    padding-bottom: 7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    padding-bottom:
+        calc(
+            7rem +
+            env(safe-area-inset-bottom)
+        );
 }
 
-/* Sidebar */
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 [data-testid="stSidebar"] {
     background:
@@ -36,7 +93,7 @@
 .sidebar-brand {
     font-size: 1.45rem;
     font-weight: 800;
-    color: #f9a8d4;
+    color: var(--raissa-pink-light);
     margin-bottom: 0.35rem;
 }
 
@@ -47,7 +104,10 @@
     margin-bottom: 1.7rem;
 }
 
-/* Header */
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .raissa-header {
     text-align: center;
@@ -55,7 +115,10 @@
 }
 
 .raissa-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 38px;
 
     padding:
         0.35rem 0.85rem;
@@ -70,7 +133,7 @@
         rgba(236, 72, 153, 0.08);
 
     color:
-        #f9a8d4;
+        var(--raissa-pink-light);
 
     font-size:
         0.78rem;
@@ -82,6 +145,9 @@
 .raissa-logo {
     font-size:
         3rem;
+
+    line-height:
+        1.05;
 
     font-weight:
         850;
@@ -106,40 +172,80 @@
 
 .raissa-subtitle {
     color:
-        #aaa0ae;
+        var(--raissa-text-soft);
 
     margin-top:
-        0.35rem;
+        0.55rem;
 
     font-size:
         0.95rem;
+
+    line-height:
+        1.5;
 }
 
-/* Tabs */
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.stTabs {
+    width: 100%;
+}
 
 .stTabs [data-baseweb="tab-list"] {
     justify-content:
         center;
 
     gap:
-        0.7rem;
+        0.55rem;
 
     margin-bottom:
         1.4rem;
+
+    overflow-x:
+        auto;
+
+    overflow-y:
+        hidden;
+
+    scrollbar-width:
+        none;
+
+    -webkit-overflow-scrolling:
+        touch;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+    display: none;
 }
 
 .stTabs [data-baseweb="tab"] {
+    flex:
+        0 0 auto;
+
+    min-height:
+        44px;
+
     border-radius:
         14px;
 
     padding:
-        0.65rem 1.35rem;
+        0.65rem 1.15rem;
 
     background:
         rgba(255, 255, 255, 0.025);
 
     border:
         1px solid rgba(255, 255, 255, 0.05);
+
+    white-space:
+        nowrap;
+}
+
+.stTabs [data-baseweb="tab"] p {
+    white-space:
+        nowrap;
 }
 
 .stTabs [aria-selected="true"] {
@@ -154,9 +260,14 @@
         rgba(244, 114, 182, 0.35) !important;
 }
 
-/* Cards */
+
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .raissa-card {
+    width: 100%;
+
     padding:
         1.25rem 1.35rem;
 
@@ -175,6 +286,9 @@
             rgba(236, 72, 153, 0.06),
             rgba(168, 85, 247, 0.025)
         );
+
+    box-sizing:
+        border-box;
 }
 
 .card-title {
@@ -202,9 +316,14 @@
         1.6;
 }
 
-/* Messages */
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
 
 [data-testid="stChatMessage"] {
+    width: 100%;
+
     border-radius:
         18px;
 
@@ -212,13 +331,24 @@
         0.6rem 0.8rem;
 
     margin-bottom:
-        0.75rem;
+        0.7rem;
 
     border:
         1px solid rgba(255, 255, 255, 0.045);
 
     background:
         rgba(255, 255, 255, 0.025);
+
+    box-sizing:
+        border-box;
+}
+
+[data-testid="stChatMessageContent"] {
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        normal;
 }
 
 .agent-label {
@@ -232,9 +362,15 @@
         0.72rem;
 }
 
-/* Buttons */
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .stButton > button {
+    min-height:
+        44px;
+
     border-radius:
         14px;
 
@@ -259,14 +395,43 @@
         translateY(-1px);
 }
 
-/* Chat input */
 
-[data-testid="stChatInput"] textarea {
+/* =========================================================
+   CHAT INPUT
+   ========================================================= */
+
+[data-testid="stChatInput"] {
+    width: 100%;
+}
+
+[data-testid="stChatInput"] > div {
     border-radius:
         18px !important;
 }
 
-/* Footer */
+[data-testid="stChatInput"] textarea {
+    border-radius:
+        18px !important;
+
+    font-size:
+        16px !important;
+
+    line-height:
+        1.4 !important;
+}
+
+[data-testid="stChatInput"] button {
+    min-width:
+        44px;
+
+    min-height:
+        44px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .raissa-footer {
     text-align:
@@ -280,32 +445,419 @@
 
     margin-top:
         2rem;
+
+    padding-bottom:
+        env(safe-area-inset-bottom);
 }
 
 
-/* Streamlit production interface cleanup */
+/* =========================================================
+   STREAMLIT CLEANUP
+   ========================================================= */
 
 footer {
-    visibility: hidden;
+    visibility:
+        hidden;
 }
 
 #MainMenu {
-    visibility: hidden;
+    visibility:
+        hidden;
 }
 
 header {
-    visibility: hidden;
+    visibility:
+        hidden;
 }
 
 [data-testid="stToolbar"] {
-    visibility: hidden;
-    height: 0;
+    visibility:
+        hidden;
+
+    height:
+        0;
 }
 
 [data-testid="stDecoration"] {
-    display: none;
+    display:
+        none;
 }
 
 [data-testid="stStatusWidget"] {
-    visibility: hidden;
+    visibility:
+        hidden;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .block-container {
+        max-width:
+            100%;
+
+        padding-top:
+            calc(
+                0.9rem +
+                env(safe-area-inset-top)
+            );
+
+        padding-left:
+            0.8rem;
+
+        padding-right:
+            0.8rem;
+
+        padding-bottom:
+            calc(
+                6.5rem +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .raissa-header {
+        margin-top:
+            0;
+
+        margin-bottom:
+            1.1rem;
+    }
+
+    .raissa-logo {
+        font-size:
+            2.35rem;
+
+        letter-spacing:
+            -1px;
+    }
+
+    .raissa-badge {
+        margin-bottom:
+            0.55rem;
+    }
+
+    .raissa-subtitle {
+        font-size:
+            0.9rem;
+
+        margin-top:
+            0.4rem;
+    }
+
+    .stTabs [data-baseweb="tab-list"] {
+        justify-content:
+            flex-start;
+
+        margin-left:
+            -0.15rem;
+
+        margin-right:
+            -0.15rem;
+
+        padding-left:
+            0.15rem;
+
+        padding-right:
+            0.15rem;
+
+        margin-bottom:
+            0.9rem;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        min-height:
+            44px;
+
+        padding:
+            0.55rem 0.85rem;
+
+        border-radius:
+            12px;
+    }
+
+    .raissa-card {
+        padding:
+            1rem 1rem;
+
+        border-radius:
+            18px;
+
+        margin-bottom:
+            0.9rem;
+    }
+
+    .card-title {
+        font-size:
+            1rem;
+    }
+
+    .card-description {
+        font-size:
+            0.86rem;
+
+        line-height:
+            1.5;
+    }
+
+    [data-testid="stChatMessage"] {
+        border-radius:
+            16px;
+
+        padding:
+            0.5rem 0.6rem;
+    }
+
+    .raissa-footer {
+        margin-top:
+            1.25rem;
+    }
+}
+
+
+/* =========================================================
+   MOBILE / IPHONE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    html {
+        -webkit-text-size-adjust:
+            100%;
+    }
+
+    .block-container {
+        padding-top:
+            calc(
+                0.4rem +
+                env(safe-area-inset-top)
+            );
+
+        padding-left:
+            0.65rem;
+
+        padding-right:
+            0.65rem;
+
+        padding-bottom:
+            calc(
+                6rem +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .raissa-header {
+        margin-bottom:
+            0.8rem;
+    }
+
+    .raissa-badge {
+        min-height:
+            34px;
+
+        padding:
+            0.25rem 0.7rem;
+
+        margin-bottom:
+            0.45rem;
+
+        font-size:
+            0.72rem;
+    }
+
+    .raissa-logo {
+        font-size:
+            2rem;
+
+        line-height:
+            1;
+
+        letter-spacing:
+            -0.8px;
+    }
+
+    .raissa-subtitle {
+        font-size:
+            0.82rem;
+
+        line-height:
+            1.35;
+
+        margin-top:
+            0.4rem;
+    }
+
+    /*
+       Mobile navigation:
+       tabs remain horizontally scrollable instead of
+       shrinking every label into the screen.
+    */
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap:
+            0.4rem;
+
+        margin-bottom:
+            0.75rem;
+
+        scroll-snap-type:
+            x proximity;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        scroll-snap-align:
+            start;
+
+        min-height:
+            42px;
+
+        padding:
+            0.45rem 0.7rem;
+
+        font-size:
+            0.82rem;
+    }
+
+    .stTabs [data-baseweb="tab"] p {
+        font-size:
+            0.82rem;
+    }
+
+    .raissa-card {
+        padding:
+            0.9rem;
+
+        margin-bottom:
+            0.75rem;
+
+        border-radius:
+            16px;
+    }
+
+    .card-title {
+        font-size:
+            0.98rem;
+
+        margin-bottom:
+            0.3rem;
+    }
+
+    .card-description {
+        font-size:
+            0.84rem;
+
+        line-height:
+            1.45;
+    }
+
+    [data-testid="stChatMessage"] {
+        padding:
+            0.45rem 0.5rem;
+
+        margin-bottom:
+            0.55rem;
+
+        border-radius:
+            15px;
+    }
+
+    [data-testid="stChatMessageContent"] {
+        font-size:
+            0.92rem;
+
+        line-height:
+            1.5;
+    }
+
+    /*
+       16px prevents Safari from automatically zooming
+       when the user touches the text input.
+    */
+
+    [data-testid="stChatInput"] textarea {
+        font-size:
+            16px !important;
+
+        min-height:
+            48px !important;
+    }
+
+    [data-testid="stChatInput"] > div {
+        min-height:
+            54px;
+
+        border-radius:
+            16px !important;
+    }
+
+    [data-testid="stChatInput"] button {
+        min-width:
+            44px;
+
+        min-height:
+            44px;
+    }
+
+    .stButton > button {
+        width:
+            100%;
+
+        min-height:
+            44px;
+    }
+
+    .raissa-footer {
+        font-size:
+            0.66rem;
+
+        margin-top:
+            1rem;
+
+        padding-bottom:
+            calc(
+                0.5rem +
+                env(safe-area-inset-bottom)
+            );
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .block-container {
+        padding-left:
+            0.5rem;
+
+        padding-right:
+            0.5rem;
+    }
+
+    .raissa-logo {
+        font-size:
+            1.8rem;
+    }
+
+    .raissa-subtitle {
+        font-size:
+            0.78rem;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        padding:
+            0.4rem 0.6rem;
+
+        font-size:
+            0.78rem;
+    }
+
+    .stTabs [data-baseweb="tab"] p {
+        font-size:
+            0.78rem;
+    }
 }
