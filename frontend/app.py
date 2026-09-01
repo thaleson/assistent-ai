@@ -33,7 +33,7 @@ def main() -> None:
         page_title="Raissa AI",
         page_icon="🌷",
         layout="centered",
-        initial_sidebar_state="expanded",
+        initial_sidebar_state="auto",
     )
 
     load_css()
