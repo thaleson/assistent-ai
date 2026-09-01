@@ -81,9 +81,7 @@ def open_conversation(
     )
 
 
-def render_conversation_history() -> None:
-
-    key_prefix:str = "history"
+def render_conversation_history(key_prefix: str = "history") -> None:
     """
     Render clickable recent conversations in the sidebar.
     """
